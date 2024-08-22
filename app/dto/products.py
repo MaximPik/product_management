@@ -5,6 +5,8 @@ class Product(BaseModel):
     description: str | None = None
     price: float
     category_id: int
+    id: int
 
 class Category(BaseModel):
     name: str
+    id: int
