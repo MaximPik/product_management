@@ -1,7 +1,7 @@
 # Взаимодействие с БД
-from product_management.app.models.users import User
+from app.models.users import User
 from sqlalchemy.orm import Session
-from product_management.app.dto import user
+from app.dto import user
 
 # Создать пользователя
 def create_user(data: user.User, db: Session):

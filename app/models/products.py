@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, Text, Float, ForeignKey
-from product_management.app.database import Base
+from app.database import Base
 from sqlalchemy.orm import relationship
 
 # Создание таблицы Users

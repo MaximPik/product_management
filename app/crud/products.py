@@ -1,11 +1,12 @@
 # Взаимодействие с БД
-from product_management.app.models.products import Product, Category
+from app.models.products import Product, Category
 from sqlalchemy.orm import Session
-from product_management.app.dto import products
+from app.dto import products
 from sqlalchemy.orm import joinedload
+from fastapi import HTTPException
 
 # Создать продукт
-def create_product(data: products.Product, db: Session):
+def create_product(data: products.ProductCreate, db: Session):
     new_product = Product(name=data.name,
                           description=data.description,
                           price=data.price,
@@ -21,7 +22,10 @@ def create_product(data: products.Product, db: Session):
 
 # Получить продукт
 def get_product(id: int, db):
-    return db.query(Product).filter(Product.id==id).first()
+    product = db.query(Product).filter(Product.id==id).first()
+    if product is None:
+        raise HTTPException(status_code=404, detail="Product not found")
+    return product
 
 # Получить продукт
 def get_products(db:Session,
@@ -30,6 +34,8 @@ def get_products(db:Session,
                 category_id: int = None,
                 ):
     query = db.query(Product)
+    if query is None:
+        raise HTTPException(status_code=404, detail="Products not found")
     if name:
         query = query.filter(Product.name == name)
     if price:
@@ -40,8 +46,10 @@ def get_products(db:Session,
     return query.all()
 
 # Обновить продукт
-def update_product(data: products.Product, db:Session, id: int):
+def update_product(data: products.ProductCreate, db:Session, id: int):
     product = db.query(Product).filter(Product.id==id).first()
+    if product is None:
+        raise HTTPException(status_code=404, detail="Product not found")
     product.name = data.name
     product.description = data.description
     product.price = data.price
@@ -61,7 +69,7 @@ def delete_product(db:Session, id: int):
     return product
 
 # Создать категорию
-def create_category(data: products.Category, db: Session):
+def create_category(data: products.CategoryCreate, db: Session):
     new_category = Category(name=data.name)
     try:
         db.add(new_category)
@@ -74,8 +82,14 @@ def create_category(data: products.Category, db: Session):
 
 # Получить категорию
 def get_category(category_id: int, db):
+    category = db.query(Product).options(joinedload(Product.Category)).filter(Product.category_id == category_id).all()
+    if category is None:
+        raise HTTPException(status_code=404, detail="Category not found")
     return db.query(Product).options(joinedload(Product.Category)).filter(Product.category_id == category_id).all()
 
 # Получить все категории
 def get_categories(db:Session):
+    categories = db.query(Category).all()
+    if categories is None:
+        raise HTTPException(status_code=404, detail="Categories not found")
     return db.query(Category).all()

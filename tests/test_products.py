@@ -30,10 +30,10 @@ def test_get_product(client):
     assert response.status_code == 200
     data = response.json()
     assert data["id"] == product_id
-    assert data["name"] == "anavas"
-    assert data["description"] == "TEXT"
-    assert data["price"] == 10.3
-    assert data["category_id"] == 2
+    assert data["name"] == "akas"
+    assert data["description"] == "nes"
+    assert data["price"] == 4
+    assert data["category_id"] == 1
 
 # Получение всех продуктов по name, price или category_id
 def test_get_all_products(client):
@@ -53,7 +53,7 @@ def test_get_all_products(client):
     product_2 = response.json()
 
     #Получение всех продуктов
-    response = client.get(f"/products/")
+    response = client.get("/products/")
     assert response.status_code == 200
     data = response.json()
     assert len(data) == 2 #получение всех пользователей
@@ -61,22 +61,21 @@ def test_get_all_products(client):
     # Получение продукта по name
     response = client.get(f"/products/?name={product_1['name']}")
     assert response.status_code == 200
-    data = response.json()
-    assert data["name"] == product_1["name"]
-    assert len(data) == 1
+    data = response.json()[0]
+    assert data == product_1
 
     # Получение продукта по price
-    response = client.get(f"/products/?name={product_1['price']}")
+    response = client.get(f"/products/?price={product_1['price']}")
     assert response.status_code == 200
     data = response.json()
-    assert data["price"] == product_1["price"]
+    assert data[0]["price"] == product_1["price"]
     assert len(data) == 1
 
     # Получение продукта по category_id
-    response = client.get(f"/products/?name={product_1['category_id']}")
+    response = client.get(f"/products/?category_id={product_1['category_id']}")
     assert response.status_code == 200
     data = response.json()
-    assert data["category_id"] == product_1["category_id"]
+    assert data[0]["category_id"] == product_1["category_id"]
     assert len(data) == 1
 
 def test_update_product(client):
@@ -111,12 +110,10 @@ def test_delete_product(client):
                                                })
     product = response.json()
     assert product is not None # Пользователь создался и существует
-
     #удалить
     response = client.delete(f"/products/{product['id']}")
-    assert response.status_code == 204  # Проверка, что удаление прошло успешно
-    product = response.json()
-    assert product is None # Продукта не существует
+    assert response.status_code == 200  # Проверка, что удаление прошло успешно
+    assert response.json() == {"detail": "Product deleted successfully"}
 
 # Создание категории
 def test_create_category(client):

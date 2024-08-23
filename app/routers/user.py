@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from product_management.app.database import get_db
-from product_management.app.crud import user as UserCrud
-from product_management.app.dto import user as UserDto
+from app.database import get_db
+from app.crud import user as UserCrud
+from app.dto import user as UserDto
 
 # В этом файле определены маршруты для операций над пользователями
 router = APIRouter()
