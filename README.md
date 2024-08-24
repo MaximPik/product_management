@@ -17,37 +17,37 @@
 ## Запуск api с использованием Dockerfile
 1. Клонируйте репозиторий проекта
 ```sh
-  https://github.com/MaximPik/product_management.git
+git clone https://github.com/MaximPik/product_management.git
 ```
 2. Соберите образ Docker.
 ```sh
-  docker build -t marketplace-crud-app -f Dockerfile .
+docker build -t marketplace-crud-app -f Dockerfile .
 ```
 3. Запустите контейнер.
 ```sh
-  docker run -d -p 8080:8080 marketplace-crud-app
+docker run -d -p 8080:8080 marketplace-crud-app
 ```
 4. Можно использовать.
 Откройте браузер и перейдите по адресу http://localhost:8080 для доступа к приложению.
 ## Запуск api с использованием DockerHub
 1. Запустите контейнер Docker из Docker Hub
 ```sh
-  docker run -d -p 8080:8080 maximpik2/marketplace-crud-app:latest
+docker run -d -p 8080:8080 maximpik2/marketplace-crud-app:latest
 ```
 2. Можно использовать.
 Откройте браузер и перейдите по адресу http://localhost:8080 для доступа к приложению.
 ## Запуск тестов с использованием Dockerfile
 1. Клонируйте репозиторий проекта
 ```sh
-  https://github.com/MaximPik/product_management.git
+git clone https://github.com/MaximPik/product_management.git
 ```
 2. Соберите образ Docker.
 ```sh
-  docker build -t marketplace-crud-app-tests -f Dockerfile.test .
+docker build -t marketplace-crud-app-tests -f Dockerfile.test .
 ```
 3. Запустите контейнер.
 ```sh
-  docker run -d -p 8080:8080 marketplace-crud-app-tests
+docker run -d -p 8080:8080 marketplace-crud-app-tests
 ```
 4. Можно использовать.
 В консоли будет информация об успешности тестов.
