@@ -2,13 +2,13 @@
 Управление продуктами на ТП
 ## Оглавление
 - [Описание](#описание)
-- [Требования](#Предварительные требования для установки и запуска)
-- [Запуск](#Запуск с использованием Dockerfile)
+- [Требования](#Предварительные-требования-для-установки-и-запуска)
+- [Запуск](#Запуск-api-с-использованием-Dockerfile)
 - [Лецензия](#лицензия)
 ## Описание
 Проект для выполнения CRUD операций с продуктами и категориями.
 Разработан с использованием технологии FastAPI, которая предоставляет возможности для
-создания, получения, удаления, измениния товаров и категорий этих товоров.  
+создания, получения, удаления, измениния товаров и категорий этих товаров.  
 Для проверки правильности работы API были написаны тесты с использованием pytest.  
 На момент публикации все тесты работают корректно.  
 ## Предварительные требования для установки и запуска
@@ -20,9 +20,13 @@
   https://github.com/MaximPik/product_management.git
 ```
 2. Соберите образ Docker.
-docker build -t marketplace-crud-app -f Dockerfile .
+```sh
+  docker build -t marketplace-crud-app -f Dockerfile .
+```
 3. Запустите контейнер.
-docker run -d -p 8080:8080 marketplace-crud-app
+```sh
+  docker run -d -p 8080:8080 marketplace-crud-app
+```
 4. Можно использовать.
 Откройте браузер и перейдите по адресу http://localhost:8080 для доступа к приложению.
 ## Запуск api с использованием DockerHub
@@ -38,8 +42,12 @@ docker run -d -p 8080:8080 marketplace-crud-app
   https://github.com/MaximPik/product_management.git
 ```
 2. Соберите образ Docker.
-docker build -t marketplace-crud-app-tests -f Dockerfile.test .
+```sh
+  docker build -t marketplace-crud-app-tests -f Dockerfile.test .
+```
 3. Запустите контейнер.
-docker run -d -p 8080:8080 marketplace-crud-app-tests
+```sh
+  docker run -d -p 8080:8080 marketplace-crud-app-tests
+```
 4. Можно использовать.
 В консоли будет информация об успешности тестов.
