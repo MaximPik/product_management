@@ -2,8 +2,8 @@
 import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from product_management.app.database import Base, get_db
-from product_management.app.main import app
+from app.database import Base, get_db
+from app.main import app
 from fastapi.testclient import TestClient
 
 # Прописываем конфигурацию БД

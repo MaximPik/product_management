@@ -16,4 +16,4 @@ RUN pip install --no-cache-dir --upgrade -r /product_manager/requirements.txt
 ENV PYTHONPATH=/product_manager:/product_manager/app
 
 # Указываем команду для запуска приложения
-CMD ["python", "app/main.py"]
+CMD ["pytest", "tests/test_products.py"]
